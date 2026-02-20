@@ -12,8 +12,8 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center text-center bg-[#0B0F19] overflow-hidden">
       {/* Gradient Glow */}
-      <div className="absolute w-[600px] h-[600px] bg-purple-600/30 blur-[150px] rounded-full top-[-200px] left-[-200px]" />
-      <div className="absolute w-[500px] h-[500px] bg-blue-600/30 blur-[150px] rounded-full bottom-[-200px] right-[-200px]" />
+      <div className="absolute w-150 h-150 bg-purple-600/30 blur-[150px] rounded-full -top-50 -left-50" />
+      <div className="absolute w-125 h-125 bg-blue-600/30 blur-[150px] rounded-full -bottom-50 -right-50" />
 
       {/* Particles */}
       <Particles
