@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="relative h-screen flex items-center justify-center text-center bg-[#0B0F19] overflow-hidden">
       {/* Gradient Glow */}
       <div className="absolute w-[600px] h-[600px] bg-purple-600/30 blur-[150px] rounded-full top-[-200px] left-[-200px]" />
-      <div className="absolute w-[500px] h-[500px] bg-blue-600/30 blur-[150px] rounded-full bottom-[-200px] right-[-200px]" />
+      <div className="absolute w-[600px] h-[600px] bg-blue-600/30 blur-[150px] rounded-full bottom-[-200px] right-[-200px]" />
 
       {/* Particles */}
       <Particles
