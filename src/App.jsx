@@ -1,9 +1,8 @@
 import Hero from "./sections/Hero";
-//import Features from "./sections/Features";
 
 function App() {
   return (
-    <div className="bg-black text-white overflow-hidden">
+    <div className="bg-[#0B0F19] text-white min-h-screen">
       <Hero />
     </div>
   );
