@@ -1,15 +1,22 @@
-import Features from "./sections/features";
-import Hero from "./sections/Hero";
-import Pricing from "./sections/Pricing";
+import Hero from "./Hero";
+import Features from "./Features";
+import Pricing from "./Pricing";
+import Testimonials from "./Testimonials";
+import Integrations from "./Integrations";
+import CTA from "./CTA";
+import FAQ from "./FAQ";
+import Footer from "./Footer";
 
-function App() {
+export default function App() {
   return (
-    <div className="bg-[#0B0F19] text-white min-h-screen">
-      <Hero />
+    <main className="bg-[#0B0F19] text-white font-sans">
+      <Hero /> {/* Floating particles + CTA */}
       <Features />
-      <Pricing />
-    </div>
+      <Testimonials />
+      <Integrations />
+      <CTA />
+      <FAQ />
+      <Footer />
+    </main>
   );
 }
-
-export default App;
