@@ -1,5 +1,4 @@
 import Hero from "./sections/Hero";
-import "./index.css";
 
 function App() {
   return (
