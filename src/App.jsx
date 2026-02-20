@@ -1,17 +1,18 @@
-import Hero from "./Hero";
-import Features from "./Features";
-import Pricing from "./Pricing";
-import Testimonials from "./Testimonials";
-import Integrations from "./Integrations";
-import CTA from "./CTA";
-import FAQ from "./FAQ";
-import Footer from "./Footer";
+import CTA from "./sections/CTA";
+import FAQ from "./sections/FAQ";
+import Features from "./sections/features";
+import Footer from "./sections/Footer";
+import Hero from "./sections/Hero";
+import Integrations from "./sections/Integrations";
+import Pricing from "./sections/Pricing";
+import Testimonials from "./sections/Testimonials";
 
 export default function App() {
   return (
     <main className="bg-[#0B0F19] text-white font-sans">
-      <Hero /> {/* Floating particles + CTA */}
+      <Hero />
       <Features />
+      <Pricing />
       <Testimonials />
       <Integrations />
       <CTA />
