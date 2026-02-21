@@ -14,8 +14,8 @@ export default function Hero() {
       {/* Animated Gradient Background */}
       <div
         className="absolute inset-0 -z-30 
-        bg-gradient-to-r from-indigo-900 via-purple-900 to-cyan-900 
-        bg-[length:200%_200%] animate-[gradientShift_12s_ease_infinite]"
+        bg-linear-to-r from-indigo-900 via-purple-900 to-cyan-900 
+        bg-size-[200%_200%] animate-[gradientShift_12s_ease_infinite]"
       />
 
       {/* Particles */}
@@ -51,8 +51,8 @@ export default function Hero() {
       />
 
       {/* Glow Blobs */}
-      <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
-      <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
+      <div className="absolute w-125 h-125 bg-cyan-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
+      <div className="absolute w-125 h-125 bg-purple-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
 
       {/* Content */}
       <motion.div
@@ -76,7 +76,7 @@ export default function Hero() {
         {/* Main Heading */}
         <motion.h1
           className="text-4xl sm:text-5xl md:text-7xl font-extrabold 
-          leading-tight bg-gradient-to-r from-cyan-400 via-purple-400 to-indigo-400 
+          leading-tight bg-linear-to-r from-cyan-400 via-purple-400 to-indigo-400 
           text-transparent bg-clip-text"
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -101,7 +101,7 @@ export default function Hero() {
             whileHover={{ scale: 1.08, rotate: 1 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 rounded-full font-semibold 
-            bg-gradient-to-r from-cyan-500 to-purple-600 
+            bg-linear-to-r from-cyan-500 to-purple-600 
             shadow-lg shadow-cyan-500/30"
           >
             Get Started
