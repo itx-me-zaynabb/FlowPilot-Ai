@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 
 const plans = [
@@ -6,25 +5,21 @@ const plans = [
     name: "Basic",
     price: "$9/mo",
     description: "Perfect for individuals",
-    features: ["Access to core features", "5 AI workflows", "Email support"],
+    features: ["Core Features", "5 AI Workflows", "Email Support"],
     isPopular: false,
   },
   {
     name: "Pro",
     price: "$29/mo",
     description: "Advanced AI for teams",
-    features: ["Unlimited workflows", "Team collaboration", "Priority support"],
+    features: ["Unlimited Workflows", "Team Collaboration", "Priority Support"],
     isPopular: true,
   },
   {
     name: "Enterprise",
     price: "Custom",
-    description: "Tailored solutions for enterprises",
-    features: [
-      "Custom workflows",
-      "Dedicated account manager",
-      "Premium support",
-    ],
+    description: "Tailored solutions",
+    features: ["Custom Workflows", "Dedicated Manager", "Premium Support"],
     isPopular: false,
   },
 ];
@@ -32,96 +27,50 @@ const plans = [
 export default function Pricing() {
   return (
     <section className="relative py-24 bg-[#0B0F19] text-white overflow-hidden">
-      {/* Gradient floating glows */}
-      <div className="absolute w-[400px] h-[400px] bg-purple-600/30 blur-[150px] rounded-full top-[-150px] left-[-150px] animate-pulse-slow" />
-      <div className="absolute w-[350px] h-[350px] bg-blue-600/30 blur-[150px] rounded-full bottom-[-150px] right-[-150px] animate-pulse-slow" />
+      <h2 className="text-4xl font-bold text-center mb-16">Pricing Plans</h2>
 
-      <h2 className="text-4xl font-bold text-center mb-16 relative z-10">
-        Pricing Plans
-      </h2>
-
-      <div className="flex flex-wrap justify-center gap-8 relative z-10">
-        {plans.map((plan, index) => (
+      <div className="grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
+        {plans.map((plan, i) => (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 60, rotate: -2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            key={i}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 120, delay: i * 0.2 }}
             viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              delay: index * 0.3,
-              type: "spring",
-              stiffness: 120,
-            }}
-            className={`w-80 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center
+            className={`relative p-8 rounded-3xl backdrop-blur-xl border
               ${
                 plan.isPopular
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none scale-105"
-                  : "bg-white/10 border border-white/20 text-gray-200 hover:scale-105 hover:rotate-1 transition-transform duration-500"
+                  ? "bg-gradient-to-br from-blue-600/40 to-purple-600/40 border-purple-500"
+                  : "bg-white/5 border-white/10"
               }`}
           >
             {plan.isPopular && (
-              <span className="bg-yellow-400 text-black text-sm px-3 py-1 rounded-full mb-4 font-semibold animate-bounce">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-sm px-4 py-1 rounded-full font-semibold animate-pulse">
                 Most Popular
-              </span>
+              </div>
             )}
 
-            <motion.h3
-              className="text-2xl font-semibold mb-2"
-              whileHover={{ scale: 1.05 }}
-            >
-              {plan.name}
-            </motion.h3>
+            <h3 className="text-2xl font-semibold mb-2">{plan.name}</h3>
+            <p className="text-gray-400 mb-6">{plan.description}</p>
+            <p className="text-4xl font-bold mb-6">{plan.price}</p>
 
-            <motion.p
-              className="text-gray-300 mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              {plan.description}
-            </motion.p>
-
-            <motion.span
-              className="text-4xl font-bold mb-6"
-              animate={{ y: [0, -5, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: "easeInOut",
-                delay: index * 0.2,
-              }}
-            >
-              {plan.price}
-            </motion.span>
-
-            <ul className="mb-6 space-y-2 text-gray-300">
-              {plan.features.map((feature, i) => (
-                <motion.li
-                  key={i}
-                  className="flex items-center gap-2"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                >
-                  <span>✅</span>
-                  {feature}
-                </motion.li>
+            <ul className="space-y-3 mb-8 text-gray-300">
+              {plan.features.map((feature, idx) => (
+                <li key={idx}>✔ {feature}</li>
               ))}
             </ul>
 
-            <motion.button
-              className={`px-6 py-3 rounded-full font-semibold transition
-                ${
-                  plan.isPopular
-                    ? "bg-white text-black hover:bg-gray-100"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
-                }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
+              className={`w-full py-3 rounded-full font-semibold transition-all
+              ${
+                plan.isPopular
+                  ? "bg-white text-black hover:scale-105"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              {plan.isPopular ? "Choose Plan" : "Get Started"}
-            </motion.button>
+              Get Started
+            </button>
           </motion.div>
         ))}
       </div>
