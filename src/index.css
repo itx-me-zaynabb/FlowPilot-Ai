@@ -2,3 +2,17 @@
 html {
   scroll-behavior: smooth;
 }
+@theme {
+  --animate-gradientShift: gradientShift 10s ease infinite;
+  --animate-floatSlow: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes floatSlow {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
