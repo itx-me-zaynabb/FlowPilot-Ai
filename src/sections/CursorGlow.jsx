@@ -2,26 +2,39 @@ import { useEffect } from "react";
 
 export default function CursorGlow() {
   useEffect(() => {
-    const glow = document.createElement("div");
-    glow.className =
-      "fixed w-32 h-32 bg-purple-500/40 blur-3xl pointer-events-none z-50 animate-glow";
-    document.body.appendChild(glow);
+    // Create multiple glow blobs
+    const glows = [];
+    const colors = ["#7F5AF0", "#3B82F6", "#0EA5E9"]; // purple, blue, cyan
+
+    for (let i = 0; i < 3; i++) {
+      const glow = document.createElement("div");
+      glow.className = `fixed w-32 h-32 pointer-events-none z-50 animate-glow-${i}`;
+      glow.style.background = colors[i] + "/40";
+      glow.style.filter = "blur(80px)";
+      glow.style.borderRadius = "50%";
+      document.body.appendChild(glow);
+      glows.push(glow);
+    }
 
     let mouseX = 0;
     let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let currentX = [0, 0, 0];
+    let currentY = [0, 0, 0];
 
     const move = (e) => {
-      mouseX = e.clientX - 64; // center glow
+      mouseX = e.clientX - 64;
       mouseY = e.clientY - 64;
     };
 
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.1;
-      currentY += (mouseY - currentY) * 0.1;
-      glow.style.left = currentX + "px";
-      glow.style.top = currentY + "px";
+      glows.forEach((glow, i) => {
+        const speed = 0.05 + i * 0.02; // trailing effect
+        currentX[i] += (mouseX - currentX[i]) * speed;
+        currentY[i] += (mouseY - currentY[i]) * speed;
+        glow.style.left = currentX[i] + "px";
+        glow.style.top = currentY[i] + "px";
+        glow.style.opacity = 0.5 + 0.5 * Math.sin(Date.now() / 1000 + i); // pulsating opacity
+      });
       requestAnimationFrame(animate);
     };
 
@@ -30,23 +43,38 @@ export default function CursorGlow() {
 
     return () => {
       window.removeEventListener("mousemove", move);
-      document.body.removeChild(glow);
+      glows.forEach((glow) => document.body.removeChild(glow));
     };
   }, []);
 
   return (
     <style>{`
-      @keyframes glowAnimation {
-        0%   { transform: scale(1) rotate(0deg); border-radius: 50% 50% 50% 50%; }
-        20%  { transform: scale(1.1) rotate(20deg); border-radius: 60% 40% 55% 45%; }
-        40%  { transform: scale(0.9) rotate(60deg); border-radius: 55% 65% 45% 50%; }
-        60%  { transform: scale(1.2) rotate(120deg); border-radius: 50% 60% 40% 55%; }
-        80%  { transform: scale(1) rotate(200deg); border-radius: 55% 45% 60% 40%; }
-        100% { transform: scale(1) rotate(360deg); border-radius: 50% 50% 50% 50%; }
+      @keyframes glowAnimation0 {
+        0%   { transform: scale(1) rotate(0deg); border-radius: 50%; }
+        50%  { transform: scale(1.2) rotate(180deg); border-radius: 60% 40% 55% 45%; }
+        100% { transform: scale(1) rotate(360deg); border-radius: 50%; }
       }
 
-      .animate-glow {
-        animation: glowAnimation 4s infinite ease-in-out;
+      @keyframes glowAnimation1 {
+        0%   { transform: scale(1) rotate(0deg); border-radius: 50%; }
+        50%  { transform: scale(1.1) rotate(200deg); border-radius: 55% 45% 60% 40%; }
+        100% { transform: scale(1) rotate(360deg); border-radius: 50%; }
+      }
+
+      @keyframes glowAnimation2 {
+        0%   { transform: scale(1) rotate(0deg); border-radius: 50%; }
+        50%  { transform: scale(1.3) rotate(160deg); border-radius: 50% 60% 40% 55%; }
+        100% { transform: scale(1) rotate(360deg); border-radius: 50%; }
+      }
+
+      .animate-glow-0 {
+        animation: glowAnimation0 5s infinite ease-in-out;
+      }
+      .animate-glow-1 {
+        animation: glowAnimation1 6s infinite ease-in-out;
+      }
+      .animate-glow-2 {
+        animation: glowAnimation2 4.5s infinite ease-in-out;
       }
     `}</style>
   );
