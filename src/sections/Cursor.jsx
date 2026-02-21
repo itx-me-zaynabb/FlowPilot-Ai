@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function CursorGlow() {
+export default function Cursor() {
   useEffect(() => {
     const cursor = document.createElement("div");
     cursor.className = "cursor-glow";

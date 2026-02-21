@@ -15,7 +15,7 @@ export default function App() {
     <main className="bg-[#0B0F19] text-white font-sans">
       <ScrollProgress />
       <Navbar />
-      <CursorGlow />
+
       <Hero />
       <Features />
       <Pricing />
