@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/purity */
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const features = [
   {
@@ -20,17 +21,55 @@ const features = [
 ];
 
 export default function Features() {
-  return (
-    <section className="relative py-24 bg-[#0B0F19] text-white overflow-hidden">
-      {/* Floating Gradient Glows (Hero style) */}
-      <div className="absolute w-[400px] h-[400px] bg-purple-600/30 blur-[150px] rounded-full top-[-150px] left-[-150px] animate-pulse-slow" />
-      <div className="absolute w-[350px] h-[350px] bg-blue-600/30 blur-[150px] rounded-full bottom-[-150px] right-[-150px] animate-pulse-slow" />
+  const containerRef = useRef();
 
-      <h2 className="text-4xl font-bold text-center mb-16 z-10 relative">
+  useEffect(() => {
+    const container = containerRef.current;
+    const particles = [];
+
+    const createParticle = (x, y) => {
+      const particle = document.createElement("div");
+      particle.className = "feature-particle";
+      particle.style.left = x + "px";
+      particle.style.top = y + "px";
+      container.appendChild(particle);
+      particles.push(particle);
+
+      setTimeout(() => {
+        particle.remove();
+        particles.splice(particles.indexOf(particle), 1);
+      }, 1000);
+    };
+
+    const mouseMove = (e) => {
+      if (e.target.closest(".feature-card")) {
+        for (let i = 0; i < 2; i++) {
+          createParticle(
+            e.clientX + Math.random() * 10 - 5,
+            e.clientY + Math.random() * 10 - 5,
+          );
+        }
+      }
+    };
+
+    window.addEventListener("mousemove", mouseMove);
+    return () => window.removeEventListener("mousemove", mouseMove);
+  }, []);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative py-24 bg-[#0B0F19] text-white overflow-hidden px-4 sm:px-6 lg:px-8"
+    >
+      {/* Floating Gradient Glows */}
+      <div className="absolute w-[400px] h-[400px] bg-purple-600/20 blur-[150px] rounded-full top-[-150px] left-[-150px] animate-pulse-slow" />
+      <div className="absolute w-[350px] h-[350px] bg-blue-600/20 blur-[150px] rounded-full bottom-[-150px] right-[-150px] animate-pulse-slow" />
+
+      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 z-10 relative">
         Features
       </h2>
 
-      <div className="flex flex-wrap justify-center gap-8 relative z-10">
+      <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 relative z-10">
         {features.map((feature, index) => (
           <motion.div
             key={index}
@@ -43,7 +82,7 @@ export default function Features() {
               type: "spring",
               stiffness: 100,
             }}
-            className="w-72 p-6 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg flex flex-col items-center text-center hover:scale-105 hover:rotate-1 transition-transform duration-500"
+            className="feature-card relative w-72 p-6 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg flex flex-col items-center text-center hover:scale-105 hover:rotate-1 hover:shadow-2xl transition-transform duration-500 cursor-pointer"
           >
             <motion.div
               className="text-5xl mb-4"
@@ -59,7 +98,7 @@ export default function Features() {
             </motion.div>
 
             <motion.h3
-              className="text-2xl font-semibold mb-2"
+              className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400"
               whileHover={{ scale: 1.05 }}
             >
               {feature.title}
@@ -76,6 +115,33 @@ export default function Features() {
           </motion.div>
         ))}
       </div>
+
+      <style>{`
+        .animate-pulse-slow {
+          animation: pulseSlow 6s ease-in-out infinite;
+        }
+        @keyframes pulseSlow {
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.1); opacity: 0.4; }
+        }
+
+        /* Hover particles */
+        .feature-particle {
+          position: fixed;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          pointer-events: none;
+          background: linear-gradient(45deg, #7f5af0, #3b82f6);
+          opacity: 0.8;
+          animation: floatFeatureParticle 1s ease-out forwards;
+        }
+
+        @keyframes floatFeatureParticle {
+          0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+          100% { transform: translate(${Math.random() * 20 - 10}px, ${-20 + Math.random() * 10}px) scale(0); opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 }
