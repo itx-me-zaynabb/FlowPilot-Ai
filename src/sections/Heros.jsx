@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Particles from "../component/Particles";
 import { motion } from "framer-motion";
 
