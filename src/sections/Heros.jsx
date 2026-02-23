@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Particles from "../component/Particles";
 import { motion } from "framer-motion";
 
@@ -26,8 +25,8 @@ export default function Heros() {
       </div>
 
       {/* Glow Blobs */}
-      <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
-      <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
+      <div className="absolute w-[350px] sm:w-[400px] md:w-[500px] h-[350px] sm:h-[400px] md:h-[500px] bg-cyan-500/20 blur-[120px] sm:blur-[150px] md:blur-[180px] rounded-full -top-32 sm:-top-36 md:-top-40 -left-32 sm:-left-36 md:-left-40 animate-pulse -z-20"></div>
+      <div className="absolute w-[350px] sm:w-[400px] md:w-[500px] h-[350px] sm:h-[400px] md:h-[500px] bg-purple-500/20 blur-[120px] sm:blur-[150px] md:blur-[180px] rounded-full -bottom-32 sm:-bottom-36 md:-bottom-40 -right-32 sm:-right-36 md:-right-40 animate-pulse -z-20"></div>
 
       {/* Content */}
       <motion.div
@@ -48,7 +47,7 @@ export default function Heros() {
 
         {/* Heading */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold
           bg-gradient-to-r from-cyan-400 via-purple-400 to-indigo-400
           text-transparent bg-clip-text"
           animate={{ y: [0, -12, 0] }}
@@ -62,14 +61,14 @@ export default function Heros() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="mt-6 text-gray-300 text-lg md:text-xl"
+          className="mt-4 sm:mt-6 text-gray-300 text-base sm:text-lg md:text-xl"
         >
           Automate complex workflows, extract real-time insights, and scale
           productivity with next-generation AI systems.
         </motion.p>
 
         {/* Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center">
+        <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
