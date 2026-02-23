@@ -1,5 +1,4 @@
 import CTA from "./sections/CTA";
-import Cursor from "./sections/Cursor";
 import FAQ from "./sections/FAQ";
 import Features from "./sections/features";
 import Footer from "./sections/Footer";
@@ -14,8 +13,8 @@ export default function App() {
   return (
     <main className="bg-[#0B0F19] text-white font-sans">
       <ScrollProgress />
+
       <Navbar />
-      <Cursor />
       <Hero />
       <Features />
       <Pricing />

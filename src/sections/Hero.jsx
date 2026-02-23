@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
+import Particles from "@tsparticles/react";
 import { motion } from "framer-motion";
-import Ballpit from "../component/Ballpit";
 
 export default function Hero() {
   return (
@@ -14,7 +14,7 @@ export default function Hero() {
 
       {/* Ballpit Background */}
       <div className="absolute inset-0 -z-20">
-        <Ballpit />
+        <Particles />
       </div>
 
       {/* Glow Blobs */}
