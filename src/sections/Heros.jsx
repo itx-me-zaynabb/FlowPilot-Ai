@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
 
-export default function Hero() {
+export default function Heros() {
   const containerRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
