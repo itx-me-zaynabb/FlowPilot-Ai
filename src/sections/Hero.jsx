@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Particles from "@tsparticles/react";
+import Particles from "../component/Particles";
 import { motion } from "framer-motion";
 
 export default function Hero() {
@@ -12,9 +12,17 @@ export default function Hero() {
         bg-[length:200%_200%] animate-[gradientShift_12s_ease_infinite]"
       />
 
-      {/* Ballpit Background */}
-      <div className="absolute inset-0 -z-20">
-        <Particles />
+      {/* Particles Background */}
+      <div className="absolute inset-0 -z-25">
+        <Particles
+          particleCount={150}
+          particleBaseSize={50}
+          particleSpread={8}
+          cameraDistance={35}
+          particleColors={["#22D3EE", "#6366F1", "#0EA5E9"]}
+          moveParticlesOnHover={true}
+          particleHoverFactor={1.2}
+        />
       </div>
 
       {/* Glow Blobs */}
