@@ -1,24 +1,23 @@
 import { useEffect, useRef } from "react";
 import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
-
 import "./Particles.css";
 
-// Default colors updated to match Hero gradient (cyan/purple/blue)
+// Default colors matching Hero gradient
 const defaultColors = ["#22D3EE", "#6366F1", "#0EA5E9"];
 
 const hexToRgb = (hex) => {
   hex = hex.replace(/^#/, "");
-  if (hex.length === 3) {
+  if (hex.length === 3)
     hex = hex
       .split("")
       .map((c) => c + c)
       .join("");
-  }
   const int = parseInt(hex, 16);
-  const r = ((int >> 16) & 255) / 255;
-  const g = ((int >> 8) & 255) / 255;
-  const b = (int & 255) / 255;
-  return [r, g, b];
+  return [
+    ((int >> 16) & 255) / 255,
+    ((int >> 8) & 255) / 255,
+    (int & 255) / 255,
+  ];
 };
 
 const vertex = /* glsl */ `
@@ -44,19 +43,16 @@ const vertex = /* glsl */ `
     vec3 pos = position * uSpread;
     pos.z *= 10.0;
 
-    vec4 mPos = modelMatrix * vec4(pos, 1.0);
+    vec4 mPos = modelMatrix * vec4(pos,1.0);
     float t = uTime;
-    mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
-    mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
-    mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
+    mPos.x += sin(t*random.z + 6.28*random.w) * mix(0.1,1.5,random.x);
+    mPos.y += sin(t*random.y + 6.28*random.x) * mix(0.1,1.5,random.w);
+    mPos.z += sin(t*random.w + 6.28*random.y) * mix(0.1,1.5,random.z);
 
     vec4 mvPos = viewMatrix * mPos;
 
-    if (uSizeRandomness == 0.0) {
-      gl_PointSize = uBaseSize;
-    } else {
-      gl_PointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz);
-    }
+    if(uSizeRandomness==0.0) gl_PointSize = uBaseSize;
+    else gl_PointSize = (uBaseSize * (1.0 + uSizeRandomness*(random.x-0.5))) / length(mvPos.xyz);
 
     gl_Position = projectionMatrix * mvPos;
   }
@@ -74,14 +70,12 @@ const fragment = /* glsl */ `
     vec2 uv = gl_PointCoord.xy;
     float d = length(uv - vec2(0.5));
 
-    if(uAlphaParticles < 0.5) {
-      if(d > 0.5) {
-        discard;
-      }
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
+    if(uAlphaParticles < 0.5){
+      if(d>0.5) discard;
+      gl_FragColor = vec4(vColor + 0.2*sin(uv.yxx+uTime+vRandom.y*6.28),1.0);
     } else {
-      float circle = smoothstep(0.5, 0.4, d) * 0.8;
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), circle);
+      float circle = smoothstep(0.5,0.4,d)*0.8;
+      gl_FragColor = vec4(vColor + 0.2*sin(uv.yxx+uTime+vRandom.y*6.28),circle);
     }
   }
 `;
