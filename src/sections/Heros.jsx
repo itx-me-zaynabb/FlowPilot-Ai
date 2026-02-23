@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import Particles from "../component/Particles";
 import { motion } from "framer-motion";
 
-export default function Hero() {
+export default function Heros() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0B0F19] text-white px-6">
       {/* Animated Gradient Background */}
@@ -41,9 +40,7 @@ export default function Hero() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="inline-block mb-6 px-4 py-1 text-sm 
-          bg-white/10 backdrop-blur-md border border-white/20 
-          rounded-full text-cyan-300"
+          className="inline-block mb-6 px-4 py-1 text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-cyan-300"
         >
           🚀 AI Powered Workflow Automation
         </motion.div>
@@ -75,9 +72,7 @@ export default function Hero() {
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full font-semibold 
-            bg-gradient-to-r from-cyan-500 to-purple-600 
-            shadow-lg shadow-cyan-500/30"
+            className="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 shadow-lg shadow-cyan-500/30"
           >
             Get Started
           </motion.button>
@@ -85,15 +80,13 @@ export default function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full border border-white/30 
-            backdrop-blur-md bg-white/5 hover:bg-white/10 transition"
+            className="px-8 py-3 rounded-full border border-white/30 backdrop-blur-md bg-white/5 hover:bg-white/10 transition"
           >
             View Demo
           </motion.button>
         </div>
       </motion.div>
 
-      {/* Gradient Animation */}
       <style>{`
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
