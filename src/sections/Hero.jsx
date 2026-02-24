@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
-import Particles from "../component/Particles";
+/* Hero.jsx */
 import { motion } from "framer-motion";
+import "../index.css"; // Make sure your bubble CSS is included here
 
 export default function Hero() {
   return (
@@ -12,14 +12,16 @@ export default function Hero() {
         bg-[length:200%_200%] animate-[gradientShift_12s_ease_infinite]"
       />
 
-      {/* Ballpit Background */}
-      <div className="absolute inset-0 -z-20">
-        <Particles />
-      </div>
-
       {/* Glow Blobs */}
       <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
       <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
+
+      {/* Bubbles Background */}
+      <div className="bubbles">
+        {Array.from({ length: 25 }).map((_, i) => (
+          <span key={i}></span>
+        ))}
+      </div>
 
       {/* Content */}
       <motion.div

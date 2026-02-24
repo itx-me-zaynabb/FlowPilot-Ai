@@ -8,14 +8,13 @@ import Pricing from "./sections/Pricing";
 import ScrollProgress from "./sections/ScrollProgress";
 import Testimonials from "./sections/Testimonials";
 import Hero from "./sections/Hero";
-import Particles from "./component/Particles";
 
 export default function App() {
   return (
     <main className="bg-[#0B0F19] text-white font-sans">
       <ScrollProgress />
       <Navbar />
-      <Particles />
+
       <Hero />
       <Features />
       <Pricing />
