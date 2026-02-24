@@ -8,13 +8,14 @@ import Pricing from "./sections/Pricing";
 import ScrollProgress from "./sections/ScrollProgress";
 import Testimonials from "./sections/Testimonials";
 import Hero from "./sections/Hero";
+import SplashCursor from "./component/SplashCursor";
 
 export default function App() {
   return (
     <main className="bg-[#0B0F19] text-white font-sans">
       <ScrollProgress />
       <Navbar />
-
+      <SplashCursor />
       <Hero />
       <Features />
       <Pricing />
