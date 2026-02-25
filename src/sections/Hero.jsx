@@ -1,20 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* Hero.jsx */
 import { motion } from "framer-motion";
-import "../index.css"; // Make sure your bubble CSS is included here
+import "../index.css";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0B0F19] text-white px-6">
-      {/* Animated Gradient Background */}
-      <div
-        className="absolute inset-0 -z-30
-        bg-gradient-to-r from-indigo-900 via-purple-900 to-cyan-900
-        bg-[length:200%_200%] animate-[gradientShift_12s_ease_infinite]"
-      />
-
-      {/* Glow Blobs */}
-      <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
-      <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
+      {/* Gradient Background */}
+      <div className="absolute inset-0 -z-30 bg-gradient-to-r from-indigo-900 via-purple-900 to-cyan-900 bg-[length:200%_200%] animate-[gradientShift_12s_ease_infinite]" />
 
       {/* Bubbles Background */}
       <div className="bubbles">
@@ -22,6 +15,10 @@ export default function Hero() {
           <span key={i}></span>
         ))}
       </div>
+
+      {/* Glow Blobs */}
+      <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] rounded-full -top-40 -left-40 animate-pulse -z-20"></div>
+      <div className="absolute w-[500px] h-[500px] bg-indigo-500/20 blur-[180px] rounded-full -bottom-40 -right-40 animate-pulse -z-20"></div>
 
       {/* Content */}
       <motion.div
@@ -35,20 +32,16 @@ export default function Hero() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="inline-block mb-6 px-4 py-1 text-sm 
-          bg-white/10 backdrop-blur-md border border-white/20 
-          rounded-full text-cyan-300"
+          className="inline-block mb-6 px-4 py-1 text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-purple-300"
         >
           🚀 AI Powered Workflow Automation
         </motion.div>
 
         {/* Heading */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold
-          bg-gradient-to-r from-cyan-400 via-purple-400 to-indigo-400
-          text-transparent bg-clip-text"
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
+          className="text-4xl sm:text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-purple-400 via-indigo-400 to-pink-400 text-transparent bg-clip-text"
         >
           FlowPilot AI
         </motion.h1>
@@ -69,9 +62,7 @@ export default function Hero() {
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full font-semibold 
-            bg-gradient-to-r from-cyan-500 to-purple-600 
-            shadow-lg shadow-cyan-500/30"
+            className="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-purple-500 to-indigo-600 shadow-lg shadow-purple-500/30"
           >
             Get Started
           </motion.button>
@@ -79,8 +70,7 @@ export default function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full border border-white/30 
-            backdrop-blur-md bg-white/5 hover:bg-white/10 transition"
+            className="px-8 py-3 rounded-full border border-white/30 backdrop-blur-md bg-white/5 hover:bg-white/10 transition"
           >
             View Demo
           </motion.button>
