@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -16,42 +17,33 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0B0F19] text-white px-6">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 -z-40 bg-gradient-to-br from-indigo-950 via-[#0B0F19] to-purple-950" />
+      <div className="absolute inset-0 -z-40 bg-gradient-to-br from-[#0B0F19] via-[#111827] to-[#1e1b4b] animate-gradientShift" />
 
-      {/* Visible Animated Grid */}
-      <div className="absolute inset-0 -z-30 opacity-40">
-        <div
-          className="absolute inset-0 animate-gridMove"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)
-            `,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
+      {/* Aurora Moving Blobs */}
+      <div className="absolute -z-30 w-[600px] h-[600px] bg-purple-600/30 blur-[160px] rounded-full -top-40 -left-40 animate-blob1" />
+      <div className="absolute -z-30 w-[600px] h-[600px] bg-indigo-600/30 blur-[160px] rounded-full -bottom-40 -right-40 animate-blob2" />
 
-      {/* Cursor Glow Effect */}
+      {/* Mouse Spotlight */}
       <div
-        className="pointer-events-none absolute -z-20 w-[400px] h-[400px] rounded-full blur-[120px]"
+        className="pointer-events-none absolute -z-20 w-[500px] h-[500px] rounded-full blur-[120px] transition-all duration-300"
         style={{
-          left: mouse.x - 200,
-          top: mouse.y - 200,
+          left: mouse.x - 250,
+          top: mouse.y - 250,
           background:
-            "radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)",
+            "radial-gradient(circle, rgba(139,92,246,0.25), transparent 70%)",
         }}
       />
 
-      {/* Floating Light Particles */}
+      {/* Subtle Floating Particles */}
       <div className="absolute inset-0 -z-10">
-        {Array.from({ length: 30 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <span
             key={i}
-            className="absolute w-1 h-1 bg-purple-400 rounded-full animate-float"
+            className="absolute w-[2px] h-[2px] bg-white/40 rounded-full animate-floatSoft"
             style={{
               left: `${Math.random() * 100}%`,
-              animationDuration: `${4 + Math.random() * 6}s`,
+              top: `${Math.random() * 100}%`,
+              animationDuration: `${8 + Math.random() * 10}s`,
               animationDelay: `${Math.random() * 5}s`,
             }}
           />
@@ -60,7 +52,7 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 80 }}
+        initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="relative z-10 max-w-3xl"
@@ -75,8 +67,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 5, repeat: Infinity }}
           className="text-4xl sm:text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-purple-400 via-indigo-400 to-pink-400 text-transparent bg-clip-text"
         >
           FlowPilot AI
@@ -85,7 +77,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 0.4, duration: 1 }}
           className="mt-6 text-gray-300 text-lg md:text-xl"
         >
           Automate complex workflows, extract real-time insights, and scale
@@ -113,21 +105,39 @@ export default function Hero() {
 
       {/* Animations */}
       <style>{`
-        @keyframes gridMove {
-          0% { transform: translateY(0px); }
-          100% { transform: translateY(60px); }
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
-        .animate-gridMove {
-          animation: gridMove 8s linear infinite;
+        .animate-gradientShift {
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
         }
 
-        @keyframes float {
-          0% { transform: translateY(100vh); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateY(-10vh); opacity: 0; }
+        @keyframes blob1 {
+          0%,100% { transform: translate(0px,0px) scale(1); }
+          50% { transform: translate(100px,50px) scale(1.1); }
         }
-        .animate-float {
-          animation: float linear infinite;
+        .animate-blob1 {
+          animation: blob1 18s infinite ease-in-out;
+        }
+
+        @keyframes blob2 {
+          0%,100% { transform: translate(0px,0px) scale(1); }
+          50% { transform: translate(-120px,-80px) scale(1.15); }
+        }
+        .animate-blob2 {
+          animation: blob2 22s infinite ease-in-out;
+        }
+
+        @keyframes floatSoft {
+          0% { transform: translateY(0px); opacity: 0.2; }
+          50% { opacity: 1; }
+          100% { transform: translateY(-40px); opacity: 0.2; }
+        }
+        .animate-floatSoft {
+          animation: floatSoft linear infinite;
         }
       `}</style>
     </section>
