@@ -1,147 +1,117 @@
-/* eslint-disable react-hooks/purity */
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 
 const features = [
   {
-    title: "Automated Workflows",
-    description: "Streamline repetitive tasks and save hours daily.",
-    icon: "⚡",
+    title: "Smart Workflow Engine",
+    description:
+      "Design, automate and optimize complex processes with AI-driven orchestration.",
+    icon: (
+      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+        <path
+          d="M4 12h16M12 4v16"
+          stroke="url(#grad1)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <defs>
+          <linearGradient id="grad1" x1="0" y1="0" x2="24" y2="24">
+            <stop stopColor="#8b5cf6" />
+            <stop offset="1" stopColor="#3b82f6" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
   },
   {
-    title: "AI Insights",
-    description: "Get real-time analytics and actionable recommendations.",
-    icon: "🤖",
+    title: "Predictive AI Insights",
+    description:
+      "Transform raw workflow data into predictive analytics and intelligent recommendations.",
+    icon: (
+      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8" stroke="#a855f7" strokeWidth="2" />
+        <path d="M12 8v4l3 3" stroke="#3b82f6" strokeWidth="2" />
+      </svg>
+    ),
   },
   {
-    title: "Collaboration",
-    description: "Seamless teamwork with AI-assisted tools.",
-    icon: "🧩",
+    title: "Real-Time Collaboration",
+    description:
+      "Enable synchronized team workflows with live updates and AI-assisted coordination.",
+    icon: (
+      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+        <path
+          d="M17 21v-2a4 4 0 0 0-3-3.87M7 21v-2a4 4 0 0 1 3-3.87"
+          stroke="#8b5cf6"
+          strokeWidth="2"
+        />
+        <circle cx="12" cy="7" r="4" stroke="#3b82f6" strokeWidth="2" />
+      </svg>
+    ),
   },
 ];
 
 export default function Features() {
-  const containerRef = useRef();
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const particles = [];
-
-    const createParticle = (x, y) => {
-      const particle = document.createElement("div");
-      particle.className = "feature-particle";
-      particle.style.left = x + "px";
-      particle.style.top = y + "px";
-      container.appendChild(particle);
-      particles.push(particle);
-
-      setTimeout(() => {
-        particle.remove();
-        particles.splice(particles.indexOf(particle), 1);
-      }, 1000);
-    };
-
-    const mouseMove = (e) => {
-      if (e.target.closest(".feature-card")) {
-        for (let i = 0; i < 2; i++) {
-          createParticle(
-            e.clientX + Math.random() * 10 - 5,
-            e.clientY + Math.random() * 10 - 5,
-          );
-        }
-      }
-    };
-
-    window.addEventListener("mousemove", mouseMove);
-    return () => window.removeEventListener("mousemove", mouseMove);
-  }, []);
+  const [active, setActive] = useState(0);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative py-24 bg-[#0B0F19] text-white overflow-hidden px-4 sm:px-6 lg:px-8"
-    >
-      {/* Floating Gradient Glows */}
-      <div className="absolute w-[400px] h-[400px] bg-purple-600/20 blur-[150px] rounded-full top-[-150px] left-[-150px] animate-pulse-slow" />
-      <div className="absolute w-[350px] h-[350px] bg-blue-600/20 blur-[150px] rounded-full bottom-[-150px] right-[-150px] animate-pulse-slow" />
+    <section className="relative py-28 bg-[#0B0F19] text-white overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute w-[500px] h-[500px] bg-purple-600/20 blur-[160px] rounded-full -top-40 -left-40"></div>
+      <div className="absolute w-[500px] h-[500px] bg-indigo-600/20 blur-[160px] rounded-full -bottom-40 -right-40"></div>
 
-      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 z-10 relative">
-        Features
-      </h2>
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          Powerful AI Capabilities
+        </h2>
 
-      <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 relative z-10">
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 60, rotate: -2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              delay: index * 0.3,
-              type: "spring",
-              stiffness: 100,
-            }}
-            className="feature-card relative w-72 p-6 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg flex flex-col items-center text-center hover:scale-105 hover:rotate-1 hover:shadow-2xl transition-transform duration-500 cursor-pointer"
-          >
-            <motion.div
-              className="text-5xl mb-4"
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: "easeInOut",
-                delay: index * 0.3,
-              }}
-            >
-              {feature.icon}
-            </motion.div>
+        <p className="text-gray-400 max-w-2xl mx-auto mb-16">
+          FlowPilot AI enhances productivity with intelligent automation,
+          predictive analytics, and collaborative intelligence.
+        </p>
 
-            <motion.h3
-              className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400"
-              whileHover={{ scale: 1.05 }}
-            >
-              {feature.title}
-            </motion.h3>
+        {/* Card Stack */}
+        <div className="relative flex justify-center items-center h-[420px]">
+          {features.map((feature, index) => {
+            const isActive = index === active;
 
-            <motion.p
-              className="text-gray-300"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 + index * 0.2, duration: 1 }}
-            >
-              {feature.description}
-            </motion.p>
-          </motion.div>
-        ))}
+            return (
+              <motion.div
+                key={index}
+                onMouseEnter={() => setActive(index)}
+                animate={{
+                  scale: isActive ? 1 : 0.9,
+                  y: isActive ? 0 : 30,
+                  opacity: isActive ? 1 : 0.5,
+                  rotate: isActive ? 0 : index % 2 === 0 ? -5 : 5,
+                  zIndex: isActive ? 20 : 10,
+                }}
+                transition={{ duration: 0.5 }}
+                className="absolute w-[320px] p-8 rounded-3xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl cursor-pointer"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {/* Glow Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-xl -z-10"></div>
+
+                <div className="flex flex-col items-center text-center space-y-6">
+                  <div className="bg-white/5 p-4 rounded-2xl">
+                    {feature.icon}
+                  </div>
+
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+                    {feature.title}
+                  </h3>
+
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-
-      <style>{`
-        .animate-pulse-slow {
-          animation: pulseSlow 6s ease-in-out infinite;
-        }
-        @keyframes pulseSlow {
-          0%, 100% { transform: scale(1); opacity: 0.6; }
-          50% { transform: scale(1.1); opacity: 0.4; }
-        }
-
-        /* Hover particles */
-        .feature-particle {
-          position: fixed;
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          pointer-events: none;
-          background: linear-gradient(45deg, #7f5af0, #3b82f6);
-          opacity: 0.8;
-          animation: floatFeatureParticle 1s ease-out forwards;
-        }
-
-        @keyframes floatFeatureParticle {
-          0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-          100% { transform: translate(${Math.random() * 20 - 10}px, ${-20 + Math.random() * 10}px) scale(0); opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }
