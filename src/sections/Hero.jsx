@@ -1,41 +1,62 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const glowRef = useRef(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  // Mouse spotlight effect
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!glowRef.current) return;
-      glowRef.current.style.left = `${e.clientX}px`;
-      glowRef.current.style.top = `${e.clientY}px`;
+    const move = (e) => {
+      setMouse({ x: e.clientX, y: e.clientY });
     };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
   }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0B0F19] text-white px-6">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 -z-40 bg-gradient-to-r from-indigo-900 via-purple-900 to-cyan-900 bg-[length:300%_300%] animate-[gradientShift_15s_ease_infinite]" />
+      <div className="absolute inset-0 -z-40 bg-gradient-to-br from-indigo-950 via-[#0B0F19] to-purple-950" />
 
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 -z-30 opacity-20">
-        <div className="w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* Visible Animated Grid */}
+      <div className="absolute inset-0 -z-30 opacity-40">
+        <div
+          className="absolute inset-0 animate-gridMove"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)
+            `,
+            backgroundSize: "60px 60px",
+          }}
+        />
       </div>
 
-      {/* Floating Gradient Orbs */}
-      <div className="absolute w-[600px] h-[600px] bg-purple-600/20 blur-[160px] rounded-full -top-40 -left-40 animate-[floatSlow_8s_ease-in-out_infinite] -z-20"></div>
-      <div className="absolute w-[500px] h-[500px] bg-indigo-600/20 blur-[160px] rounded-full -bottom-40 -right-40 animate-[floatSlow_10s_ease-in-out_infinite] -z-20"></div>
-
-      {/* Mouse Glow Spotlight */}
+      {/* Cursor Glow Effect */}
       <div
-        ref={glowRef}
-        className="pointer-events-none fixed w-[300px] h-[300px] bg-purple-500/20 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-150"
-      ></div>
+        className="pointer-events-none absolute -z-20 w-[400px] h-[400px] rounded-full blur-[120px]"
+        style={{
+          left: mouse.x - 200,
+          top: mouse.y - 200,
+          background:
+            "radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)",
+        }}
+      />
+
+      {/* Floating Light Particles */}
+      <div className="absolute inset-0 -z-10">
+        {Array.from({ length: 30 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute w-1 h-1 bg-purple-400 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${4 + Math.random() * 6}s`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Content */}
       <motion.div
@@ -90,17 +111,23 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Keyframes */}
+      {/* Animations */}
       <style>{`
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+        @keyframes gridMove {
+          0% { transform: translateY(0px); }
+          100% { transform: translateY(60px); }
+        }
+        .animate-gridMove {
+          animation: gridMove 8s linear infinite;
         }
 
-        @keyframes floatSlow {
-          0%,100% { transform: translateY(0px); }
-          50% { transform: translateY(-40px); }
+        @keyframes float {
+          0% { transform: translateY(100vh); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateY(-10vh); opacity: 0; }
+        }
+        .animate-float {
+          animation: float linear infinite;
         }
       `}</style>
     </section>
