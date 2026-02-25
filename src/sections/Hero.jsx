@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import ParticlesBackground from "./ParticlesBackground";
+import ParticlesBackground from "../component/ParticlesBackground";
 
 export default function Hero() {
   return (
