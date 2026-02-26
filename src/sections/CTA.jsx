@@ -18,7 +18,6 @@ export default function CTA() {
         Start Free Trial
       </motion.button>
 
-      {/* Optional: subtle animated underline or glow */}
       <style>{`
         @keyframes textGradient {
           0% { background-position: 0% 50%; }
