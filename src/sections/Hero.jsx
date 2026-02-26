@@ -1,145 +1,164 @@
-/* eslint-disable react-hooks/purity */
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const move = (e) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0B0F19] text-white px-6">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 -z-40 bg-gradient-to-br from-[#0B0F19] via-[#111827] to-[#1e1b4b] animate-gradientShift" />
-
-      {/* Aurora Moving Blobs */}
-      <div className="absolute -z-30 w-[600px] h-[600px] bg-purple-600/30 blur-[160px] rounded-full -top-40 -left-40 animate-blob1" />
-      <div className="absolute -z-30 w-[600px] h-[600px] bg-indigo-600/30 blur-[160px] rounded-full -bottom-40 -right-40 animate-blob2" />
-
-      {/* Mouse Spotlight */}
-      <div
-        className="pointer-events-none absolute -z-20 w-[500px] h-[500px] rounded-full blur-[120px] transition-all duration-300"
-        style={{
-          left: mouse.x - 250,
-          top: mouse.y - 250,
-          background:
-            "radial-gradient(circle, rgba(139,92,246,0.25), transparent 70%)",
-        }}
-      />
-
-      {/* Subtle Floating Particles */}
-      <div className="absolute inset-0 -z-10">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute w-[2px] h-[2px] bg-white/40 rounded-full animate-floatSoft"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDuration: `${8 + Math.random() * 10}s`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="relative z-10 max-w-3xl"
-      >
+    <section className="min-h-screen flex items-center justify-center bg-[#0B0F19] text-white px-6">
+      <div className="max-w-4xl text-center">
+        {/* Badge */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="inline-block mb-6 px-4 py-1 text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-purple-300"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 mb-8 px-6 py-2 text-sm border border-white/20 rounded-full text-gray-300 hover:text-purple-400 hover:border-purple-400 transition-all duration-300"
         >
           🚀 AI Powered Workflow Automation
         </motion.div>
 
+        {/* Heading with continuous ripple */}
         <motion.h1
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity }}
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-purple-400 via-indigo-400 to-pink-400 text-transparent bg-clip-text"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 flex justify-center"
         >
-          FlowPilot AI
+          <span className="relative cursor-default">
+            {/* Gradient + Ripple Text */}
+            <span
+              className="
+                bg-gradient-to-r from-purple-400 via-indigo-400 to-pink-400
+                bg-[length:200%_200%]
+                text-transparent bg-clip-text
+                animate-gradientFlow animate-rippleText
+              "
+            >
+              FlowPilot AI
+            </span>
+
+            {/* Glow Layer */}
+            <span
+              className="
+                absolute inset-0
+                bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500
+                blur-xl opacity-40
+                transition duration-500
+                -z-10
+              "
+            ></span>
+          </span>
         </motion.h1>
 
+        {/* Animated Underline */}
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: "180px" }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="h-[3px] bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 mx-auto mb-8 rounded-full"
+        />
+
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 1 }}
-          className="mt-6 text-gray-300 text-lg md:text-xl"
+          transition={{ delay: 1.2 }}
+          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
         >
           Automate complex workflows, extract real-time insights, and scale
           productivity with next-generation AI systems.
         </motion.p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center">
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6 }}
+          className="mt-10 flex flex-col sm:flex-row gap-6 justify-center"
+        >
           <motion.button
-            whileHover={{ scale: 1.08 }}
+            whileHover={{
+              scale: 1.07,
+              boxShadow: "0px 0px 30px rgba(168,85,247,0.6)",
+            }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-purple-500 to-indigo-600 shadow-lg shadow-purple-500/30"
+            className="
+              px-8 py-3 rounded-full font-semibold text-white
+              bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500
+              bg-[length:200%_200%] hover:animate-gradientFlow transition-all duration-300
+            "
           >
             Get Started
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={{
+              scale: 1.05,
+              borderColor: "#a855f7",
+              color: "#a855f7",
+            }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full border border-white/30 backdrop-blur-md bg-white/5 hover:bg-white/10 transition"
+            className="px-8 py-3 rounded-full border border-white/30 text-gray-300 transition-all duration-300"
           >
             View Demo
           </motion.button>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
-      {/* Animations */}
+      {/* CSS Animations */}
       <style>{`
-        @keyframes gradientShift {
+        @keyframes gradientFlow {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        .animate-gradientShift {
-          background-size: 200% 200%;
-          animation: gradientShift 15s ease infinite;
+
+        @keyframes rippleText {
+          0% { filter: url(#ripple1); }
+          50% { filter: url(#ripple2); }
+          100% { filter: url(#ripple1); }
         }
 
-        @keyframes blob1 {
-          0%,100% { transform: translate(0px,0px) scale(1); }
-          50% { transform: translate(100px,50px) scale(1.1); }
-        }
-        .animate-blob1 {
-          animation: blob1 18s infinite ease-in-out;
+        .animate-gradientFlow {
+          animation: gradientFlow 5s ease infinite;
         }
 
-        @keyframes blob2 {
-          0%,100% { transform: translate(0px,0px) scale(1); }
-          50% { transform: translate(-120px,-80px) scale(1.15); }
-        }
-        .animate-blob2 {
-          animation: blob2 22s infinite ease-in-out;
-        }
-
-        @keyframes floatSoft {
-          0% { transform: translateY(0px); opacity: 0.2; }
-          50% { opacity: 1; }
-          100% { transform: translateY(-40px); opacity: 0.2; }
-        }
-        .animate-floatSoft {
-          animation: floatSoft linear infinite;
+        .animate-rippleText {
+          animation: rippleText 4s ease-in-out infinite;
         }
       `}</style>
+
+      {/* SVG Filters for continuous ripple */}
+      <svg width="0" height="0">
+        <filter id="ripple1">
+          <feTurbulence
+            type="turbulence"
+            baseFrequency="0.02"
+            numOctaves="2"
+            result="turb"
+          />
+          <feDisplacementMap
+            in2="turb"
+            in="SourceGraphic"
+            scale="10"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+        <filter id="ripple2">
+          <feTurbulence
+            type="turbulence"
+            baseFrequency="0.03"
+            numOctaves="2"
+            result="turb"
+          />
+          <feDisplacementMap
+            in2="turb"
+            in="SourceGraphic"
+            scale="15"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
     </section>
   );
 }
