@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Features", id: "features" },
   { name: "Pricing", id: "pricing" },
   { name: "FAQ", id: "faq" },
+  { name: "Testimonials", id: "testimonials" },
+  { name: "Team", id: "team" },
 ];
 
 export default function Navbar() {
@@ -15,25 +18,23 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-
-      // Detect active section
       let current = "hero";
       navLinks.forEach((link) => {
         const section = document.getElementById(link.id);
         if (section) {
-          const offsetTop = section.offsetTop - 100;
-          if (window.scrollY >= offsetTop) {
-            current = link.id;
-          }
+          const offsetTop = section.offsetTop - 120;
+          if (window.scrollY >= offsetTop) current = link.id;
         }
       });
       setActiveSection(current);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /**
+   * @param {string} id
+   */
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -66,11 +67,9 @@ export default function Navbar() {
             <button
               key={link.id}
               onClick={() => scrollToSection(link.id)}
-              className={`relative font-medium transition-all duration-300 hover:text-white hover:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-400 after:to-indigo-400 after:w-0 after:transition-all ${
-                activeSection === link.id
-                  ? "text-white font-semibold after:w-full"
-                  : ""
-              }`}
+              className={`relative font-medium transition-all duration-300 hover:text-white hover:after:w-full
+                after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-400 after:to-indigo-400 after:w-0 after:transition-all
+                ${activeSection === link.id ? "text-white font-semibold after:w-full" : ""}`}
             >
               {link.name}
             </button>
