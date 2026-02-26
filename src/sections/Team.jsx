@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 
+import Emma from "../assets/emma.jpg";
+import Liam from "../assets/liam.jpg";
+import Olivia from "../assets/olivia.jpg";
+import Noah from "../assets/noah.jpg";
+
 const team = [
-  { name: "Emma R.", role: "CEO & Founder", image: "/team/emma.jpg" },
-  { name: "Liam S.", role: "CTO", image: "/team/liam.jpg" },
-  { name: "Olivia P.", role: "Lead Designer", image: "/team/olivia.jpg" },
-  { name: "Noah M.", role: "AI Engineer", image: "/team/noah.jpg" },
+  { name: "Emma R.", role: "CEO & Founder", image: Emma },
+  { name: "Liam S.", role: "CTO", image: Liam },
+  { name: "Olivia P.", role: "Lead Designer", image: Olivia },
+  { name: "Noah M.", role: "AI Engineer", image: Noah },
 ];
 
 export default function Team() {

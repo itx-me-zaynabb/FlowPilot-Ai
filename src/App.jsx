@@ -9,6 +9,8 @@ import ScrollProgress from "./sections/ScrollProgress";
 import Testimonials from "./sections/Testimonials";
 import Hero from "./sections/Hero";
 import SplashCursor from "./component/SplashCursor";
+import Team from "./sections/Team";
+import Newsletter from "./sections/Newsletter";
 
 export default function App() {
   return (
@@ -19,10 +21,12 @@ export default function App() {
       <Hero />
       <Features />
       <Pricing />
+      <Team />
       <Testimonials />
       <Integrations />
       <CTA />
       <FAQ />
+      <Newsletter />
       <Footer />
     </main>
   );
