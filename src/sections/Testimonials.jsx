@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/purity */
-import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 const reviews = [
   {
@@ -21,20 +22,20 @@ const reviews = [
 ];
 
 export default function Testimonials() {
-  const containerRef = useRef();
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
+    if (!container) return;
     const particles = [];
 
     const createParticle = (x, y) => {
       const particle = document.createElement("div");
       particle.className = "testimonial-particle";
-      particle.style.left = x + "px";
-      particle.style.top = y + "px";
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
       container.appendChild(particle);
       particles.push(particle);
-
       setTimeout(() => {
         particle.remove();
         particles.splice(particles.indexOf(particle), 1);
@@ -59,8 +60,8 @@ export default function Testimonials() {
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; // x inside card
-    const y = e.clientY - rect.top; // y inside card
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     const rotateX = ((y - centerY) / centerY) * 5;
@@ -75,6 +76,7 @@ export default function Testimonials() {
   return (
     <section
       ref={containerRef}
+      id="testimonials"
       className="relative py-24 bg-[#0B0F19] px-4 sm:px-6 lg:px-8"
     >
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-white">
@@ -117,10 +119,9 @@ export default function Testimonials() {
           opacity: 0.8;
           animation: floatParticle 1s ease-out forwards;
         }
-
         @keyframes floatParticle {
-          0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-          100% { transform: translate(${Math.random() * 20 - 10}px, ${-20 + Math.random() * 10}px) scale(0); opacity: 0; }
+          0% { transform: translate(0,0) scale(1); opacity: 0.8; }
+          100% { transform: translate(${Math.random() * 20 - 10}px, ${-20 + Math.random() * 10}px) scale(0); opacity:0; }
         }
       `}</style>
     </section>

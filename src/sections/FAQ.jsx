@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -17,10 +19,13 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = (useState < number) | (null > null);
 
   return (
-    <section className="py-24 bg-[#0B0F19] text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="faq"
+      className="py-24 bg-[#0B0F19] text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
+    >
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
         Frequently Asked Questions
       </h2>
