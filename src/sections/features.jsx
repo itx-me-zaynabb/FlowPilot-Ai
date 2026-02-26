@@ -1,115 +1,113 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const features = [
   {
-    title: "Smart Workflow Engine",
+    title: "Smart Workflow Automation",
     description:
-      "Design, automate and optimize complex processes with AI-driven orchestration.",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
-        <path
-          d="M4 12h16M12 4v16"
-          stroke="url(#grad1)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <defs>
-          <linearGradient id="grad1" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#8b5cf6" />
-            <stop offset="1" stopColor="#3b82f6" />
-          </linearGradient>
-        </defs>
-      </svg>
-    ),
+      "Design and deploy complex automation pipelines with adaptive AI orchestration.",
+    gradient: "from-purple-500 to-indigo-600",
   },
   {
-    title: "Predictive AI Insights",
+    title: "Predictive Intelligence",
     description:
-      "Transform raw workflow data into predictive analytics and intelligent recommendations.",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" stroke="#a855f7" strokeWidth="2" />
-        <path d="M12 8v4l3 3" stroke="#3b82f6" strokeWidth="2" />
-      </svg>
-    ),
+      "Leverage machine learning to forecast outcomes and optimize decisions.",
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
-    title: "Real-Time Collaboration",
+    title: "Real-Time Analytics",
     description:
-      "Enable synchronized team workflows with live updates and AI-assisted coordination.",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
-        <path
-          d="M17 21v-2a4 4 0 0 0-3-3.87M7 21v-2a4 4 0 0 1 3-3.87"
-          stroke="#8b5cf6"
-          strokeWidth="2"
-        />
-        <circle cx="12" cy="7" r="4" stroke="#3b82f6" strokeWidth="2" />
-      </svg>
-    ),
+      "Monitor live workflow performance with dynamic dashboards and insights.",
+    gradient: "from-indigo-500 to-purple-500",
+  },
+  {
+    title: "Secure Cloud Architecture",
+    description:
+      "Enterprise-grade encryption and scalable infrastructure built for growth.",
+    gradient: "from-cyan-500 to-blue-600",
+  },
+  {
+    title: "AI-Powered Collaboration",
+    description:
+      "Enhance team productivity with synchronized AI-assisted workflows.",
+    gradient: "from-purple-600 to-blue-500",
+  },
+  {
+    title: "Seamless API Integrations",
+    description:
+      "Connect third-party tools and services effortlessly with modular APIs.",
+    gradient: "from-indigo-600 to-cyan-500",
   },
 ];
 
 export default function Features() {
-  const [active, setActive] = useState(0);
-
   return (
     <section className="relative py-28 bg-[#0B0F19] text-white overflow-hidden">
-      {/* Background Glow */}
+      {/* Background Glows */}
       <div className="absolute w-[500px] h-[500px] bg-purple-600/20 blur-[160px] rounded-full -top-40 -left-40"></div>
-      <div className="absolute w-[500px] h-[500px] bg-indigo-600/20 blur-[160px] rounded-full -bottom-40 -right-40"></div>
+      <div className="absolute w-[500px] h-[500px] bg-blue-600/20 blur-[160px] rounded-full -bottom-40 -right-40"></div>
 
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-6xl font-bold mb-6">
-          Powerful AI Capabilities
-        </h2>
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        {/* Section Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-6xl font-bold mb-6"
+        >
+          Advanced AI Capabilities
+        </motion.h2>
 
-        <p className="text-gray-400 max-w-2xl mx-auto mb-16">
-          FlowPilot AI enhances productivity with intelligent automation,
-          predictive analytics, and collaborative intelligence.
-        </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-gray-400 max-w-2xl mx-auto mb-20"
+        >
+          FlowPilot AI empowers modern teams with automation, intelligence, and
+          real-time collaboration at enterprise scale.
+        </motion.p>
 
-        {/* Card Stack */}
-        <div className="relative flex justify-center items-center h-[420px]">
-          {features.map((feature, index) => {
-            const isActive = index === active;
+        {/* Feature Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              whileHover={{
+                rotateX: 5,
+                rotateY: -5,
+                scale: 1.05,
+              }}
+              className="relative group p-8 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl transition-all duration-500"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Gradient Border Glow */}
+              <div
+                className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-20 blur-xl transition duration-500 -z-10`}
+              ></div>
 
-            return (
-              <motion.div
-                key={index}
-                onMouseEnter={() => setActive(index)}
-                animate={{
-                  scale: isActive ? 1 : 0.9,
-                  y: isActive ? 0 : 30,
-                  opacity: isActive ? 1 : 0.5,
-                  rotate: isActive ? 0 : index % 2 === 0 ? -5 : 5,
-                  zIndex: isActive ? 20 : 10,
-                }}
-                transition={{ duration: 0.5 }}
-                className="absolute w-[320px] p-8 rounded-3xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl cursor-pointer"
-                style={{ transformStyle: "preserve-3d" }}
+              {/* Icon Circle */}
+              <div
+                className={`w-14 h-14 mb-6 mx-auto rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center shadow-lg`}
               >
-                {/* Glow Border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-xl -z-10"></div>
+                <div className="w-6 h-6 bg-white rounded-sm"></div>
+              </div>
 
-                <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="bg-white/5 p-4 rounded-2xl">
-                    {feature.icon}
-                  </div>
+              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+                {feature.title}
+              </h3>
 
-                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
-                    {feature.title}
-                  </h3>
-
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
