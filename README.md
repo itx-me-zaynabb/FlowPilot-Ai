@@ -8,7 +8,7 @@ This project demonstrates advanced animation systems, smooth SPA routing, perfor
 
 ## 🌐 Live Preview
 
-(Deploy link here – e.g. Vercel)
+https://flow-pilot-ai.vercel.app/#
 
 ---
 
